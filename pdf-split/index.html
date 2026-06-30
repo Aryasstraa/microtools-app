@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All-in-One Micro-Tools | Pisah (Split) PDF</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                        }
+                    },
+                    boxShadow: {
+                        'float': '0 10px 30px -10px rgba(0, 0, 0, 0.1)',
+                        'float-hover': '0 20px 40px -10px rgba(0, 0, 0, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+        .card-float { transition: all 0.3s ease; }
+        .card-float:hover { transform: translateY(-8px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15); }
+        .animation-delay-2000 { animation-delay: 2s; }
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]">
+    
+    <!-- Navbar -->
+    <nav class="glass fixed w-full z-50 border-b border-white/50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="/microtools-app" class="flex items-center gap-2 group">
+                        <div class="w-10 h-10 bg-brand-500 rounded-xl flex items-center justify-center text-white shadow-float group-hover:rotate-12 transition-transform">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <span class="font-bold text-xl tracking-tight text-slate-800">Micro<span class="text-brand-500">Tools</span></span>
+                    </a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-500 hover:text-brand-500 focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+                <div class="flex gap-6 hidden md:flex items-center" id="desktop-menu">
+                    <a href="/microtools-app" class="text-sm font-semibold text-slate-600 hover:text-brand-500 transition-colors py-4">Beranda</a>
+                    
+                    <!-- Tools Mega Menu -->
+                    <div class="relative group py-4">
+                        <button class="text-sm font-semibold text-brand-600 group-hover:text-brand-700 transition-colors flex items-center gap-1">
+                            Tools <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                        </button>
+                        
+                        <!-- Full-width dropdown area -->
+                        <div class="fixed left-0 right-0 top-16 bg-white/95 backdrop-blur-2xl border-t border-slate-100 shadow-float opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform -translate-y-2 group-hover:translate-y-0 z-50">
+                            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                                <div class="grid grid-cols-4 gap-8">
+                                    
+                                    <!-- Column 1 -->
+                                    <div class="flex flex-col gap-6">
+                                        <div>
+                                            <h4 class="text-[10px] font-bold text-slate-400 tracking-widest uppercase mb-3 ml-2">POPULER</h4>
+                                            <div class="flex flex-col gap-1">
+                                                <a href="/microtools-app/pdf-merge" class="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-slate-50 text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">
+                                                    <div class="w-6 h-6 rounded bg-brand-50 flex items-center justify-center text-brand-500"><i class="fa-solid fa-object-group text-[10px]"></i></div>
+                                                    Gabungkan PDF
+                                                </a>
+                                                <a href="/microtools-app/pdf-compress" class="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-slate-50 text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">
+                                                    <div class="w-6 h-6 rounded bg-brand-50 flex items-center justify-center text-brand-500"><i class="fa-solid fa-compress text-[10px]"></i></div>
+                                                    Kompres PDF
+                                                </a>
+                                                <a href="/microtools-app/img-to-pdf" class="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-slate-50 text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">
+                                                    <div class="w-6 h-6 rounded bg-brand-50 flex items-center justify-center text-brand-500"><i class="fa-solid fa-image text-[10px]"></i></div>
+                                                    JPG ke PDF
+                                                </a>
+                                                <a href="/microtools-app/pdf-optimize" class="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-slate-50 text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">
+                                                    <div class="w-6 h-6 rounded bg-brand-50 flex items-center justify-center text-brand-500"><i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i></div>
+                                                    Optimize PDF
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-[10px] font-bold text-slate-400 tracking-widest uppercase mb-3 ml-2">EDIT & ATUR</h4>
+                                            <div class="flex flex-col gap-1">
+                                                <a href="/microtools-app/pdf-split" class="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-slate-50 text-sm font-medium text-slate-600 hover:text-blue-500 transition-colors">
+                                                    <div class="w-6 h-6 rounded bg-blue-50 flex items-center justify-center text-blue-500"><i class="fa-solid fa-scissors text-[10px]"></i></div>
+                                                    Pisahkan PDF
+                                                </a>
+                                                <a href="/microtools-app/pdf-crop" class="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-slate-50 text-sm font-medium text-slate-600 hover:text-pink-500 transition-colors">
+                                                    <div class="w-6 h-6 rounded bg-pink-50 flex items-center justify-center text-pink-500"><i class="fa-solid fa-crop text-[10px]"></i></div>
+                                                    Crop PDF
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Column 2 -->
+                                    <div class="flex flex-col gap-6">
+                                        <div>
+                                            <h4 class="text-[10px] font-bold text-slate-400 tracking-widest uppercase mb-3 ml-2">HALAMAN</h4>
+                                            <div class="flex flex-col gap-1">
+                                                <a href="/microtools-app/pdf-rotate" class="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-slate-50 text-sm font-medium text-slate-600 hover:text-orange-500 transition-colors">
+                                                    <div class="w-6 h-6 rounded bg-orange-50 flex items-center justify-center text-orange-500"><i class="fa-solid fa-rotate-right text-[10px]"></i></div>
+                                                    Putar PDF
+                                                </a>
+                                                <a href="/microtools-app/pdf-remove-pages" class="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-slate-50 text-sm font-medium text-slate-600 hover:text-red-500 transition-colors">
+                                                    <div class="w-6 h-6 rounded bg-red-50 flex items-center justify-center text-red-500"><i class="fa-solid fa-trash text-[10px]"></i></div>
+                                                    Hapus Halaman
+                                                </a>
+                                                <a href="/microtools-app/pdf-extract-pages" class="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-slate-50 text-sm font-medium text-slate-600 hover:text-indigo-500 transition-colors">
+                                                    <div class="w-6 h-6 rounded bg-indigo-50 flex items-center justify-center text-indigo-500"><i class="fa-solid fa-file-export text-[10px]"></i></div>
+                                                    Ekstrak Halaman
+                                                </a>
+                                                <a href="/microtools-app/pdf-organize-pages" class="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-slate-50 text-sm font-medium text-slate-600 hover:text-violet-500 transition-colors">
+                                                    <div class="w-6 h-6 rounded bg-violet-50 flex items-center justify-center text-violet-500"><i class="fa-solid fa-arrow-up-wide-short text-[10px]"></i></div>
+                                                    Atur Halaman
+                                                </a>
+                                                <a href="/microtools-app/pdf-page-numbers" class="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-slate-50 text-sm font-medium text-slate-600 hover:text-yellow-600 transition-colors">
+                                                    <div class="w-6 h-6 rounded bg-yellow-50 flex items-center justify-center text-yellow-600"><i class="fa-solid fa-list-ol text-[10px]"></i></div>
+                                                    Nomor Halaman
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-[10px] font-bold text-slate-400 tracking-widest uppercase mb-3 ml-2">GAMBAR</h4>
+                                            <div class="flex flex-col gap-1">
+                                                <a href="/microtools-app/img-to-pdf" class="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-slate-50 text-sm font-medium text-slate-600 hover:text-cyan-500 transition-colors">
+                                                    <div class="w-6 h-6 rounded bg-cyan-50 flex items-center justify-center text-cyan-500"><i class="fa-solid fa-image text-[10px]"></i></div>
+                                                    PNG ke PDF
+                                                </a>
+                                                <a href="/microtools-app/pdf-to-jpg" class="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-slate-50 text-sm font-medium text-slate-600 hover:text-cyan-500 transition-colors">
+                                                    <div class="w-6 h-6 rounded bg-cyan-50 flex items-center justify-center text-cyan-500"><i class="fa-solid fa-file-image text-[10px]"></i></div>
+                                                    PDF ke JPG
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Column 3 -->
+                                    <div class="flex flex-col gap-6">
+                                        <div>
+                                            <h4 class="text-[10px] font-bold text-slate-400 tracking-widest uppercase mb-3 ml-2">TEKS</h4>
+                                            <div class="flex flex-col gap-1">
+                                                <a href="/microtools-app/pdf-to-txt" class="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-slate-50 text-sm font-medium text-slate-600 hover:text-slate-700 transition-colors">
+                                                    <div class="w-6 h-6 rounded bg-slate-100 flex items-center justify-center text-slate-600"><i class="fa-solid fa-file-lines text-[10px]"></i></div>
+                                                    PDF ke TXT
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-[10px] font-bold text-slate-400 tracking-widest uppercase mb-3 ml-2">KEAMANAN</h4>
+                                            <div class="flex flex-col gap-1">
+
+                                                <a href="/microtools-app/pdf-unlock" class="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-slate-50 text-sm font-medium text-slate-600 hover:text-green-500 transition-colors">
+                                                    <div class="w-6 h-6 rounded bg-green-50 flex items-center justify-center text-green-500"><i class="fa-solid fa-unlock text-[10px]"></i></div>
+                                                    Buka Kunci PDF
+                                                </a>
+                                                <a href="/microtools-app/pdf-watermark" class="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-slate-50 text-sm font-medium text-slate-600 hover:text-blue-500 transition-colors">
+                                                    <div class="w-6 h-6 rounded bg-blue-50 flex items-center justify-center text-blue-500"><i class="fa-solid fa-stamp text-[10px]"></i></div>
+                                                    Watermark PDF
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Column 4 -->
+                                    <div class="flex flex-col gap-6">
+                                        <div>
+                                            <h4 class="text-[10px] font-bold text-slate-400 tracking-widest uppercase mb-3 ml-2">LAINNYA</h4>
+                                            <div class="flex flex-col gap-1">
+                                                <a href="/microtools-app/html-to-pdf" class="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-slate-50 text-sm font-medium text-slate-600 hover:text-blue-500 transition-colors">
+                                                    <div class="w-6 h-6 rounded bg-blue-50 flex items-center justify-center text-blue-500"><i class="fa-solid fa-code text-[10px]"></i></div>
+                                                    HTML ke PDF
+                                                </a>
+                                                <a href="/microtools-app/pdf-fixer" class="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-slate-50 text-sm font-medium text-slate-600 hover:text-slate-600 transition-colors">
+                                                    <div class="w-6 h-6 rounded bg-slate-100 flex items-center justify-center text-slate-600"><i class="fa-solid fa-wrench text-[10px]"></i></div>
+                                                    Perbaiki Teks PDF
+                                                </a>
+                                                <a href="/microtools-app/word-metadata-cleaner" class="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-slate-50 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">
+                                                    <div class="w-6 h-6 rounded bg-blue-50 flex items-center justify-center text-blue-600"><i class="fa-solid fa-eraser text-[10px]"></i></div>
+                                                    Pembersih Metadata
+                                                </a>
+                                            </div>
+                                        </div>
+                                        
+
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="/microtools-app/qr-generator" class="text-sm font-semibold text-slate-600 hover:text-indigo-500 transition-colors py-4">QR Generator</a>
+                    <a href="/microtools-app/tentang" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-4 ml-4">Tentang</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-slate-100 shadow-lg absolute w-full left-0 top-16">
+            <div class="px-4 py-4 flex flex-col gap-4">
+                <a href="/microtools-app" class="text-sm font-semibold text-slate-600 hover:text-brand-500">Beranda (Semua Tools)</a>
+                <a href="/microtools-app/qr-generator" class="text-sm font-semibold text-slate-600 hover:text-indigo-500">QR Generator</a>
+                <a href="/microtools-app/tentang" class="text-sm font-semibold text-slate-600 hover:text-slate-900">Tentang</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            var menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        });
+    </script>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        <!-- Top Ad Space -->
+        <div class="w-full max-w-4xl mx-auto mb-8 h-24 border-2 border-dashed border-slate-300 rounded-2xl flex items-center justify-center text-slate-400 bg-white/50 relative overflow-hidden group hover:border-slate-400 transition-colors">
+            <span class="font-medium text-sm flex flex-col items-center gap-1"><i class="fa-solid fa-rectangle-ad text-2xl"></i> Ad Space (728x90)</span>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-10 relative">
+        <h1 class="text-3xl font-bold text-slate-800 mb-4 drop-shadow-sm">Pisah (Split) PDF Instan</h1>
+        <p class="text-slate-600">Ekstrak halaman dari PDF Anda. 100% diproses di browser, tanpa upload ke server.</p>
+    </div>
+
+    <div class="bg-white/80 backdrop-blur-lg rounded-3xl p-6 md:p-8 shadow-float hover:shadow-float-hover transition-shadow duration-300 border border-white">
+        
+        <!-- Dropzone -->
+        <div id="dropzone" class="w-full h-48 border-2 border-dashed border-orange-300 rounded-2xl bg-orange-50/40 flex flex-col items-center justify-center text-slate-500 cursor-pointer hover:bg-orange-50 hover:border-orange-400 transition-all duration-300 mb-8 relative overflow-hidden group">
+            <input type="file" id="fileInput" accept="application/pdf" class="hidden">
+            <div class="w-16 h-16 bg-white rounded-full shadow-sm flex items-center justify-center mb-4 group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-300 pointer-events-none">
+                <i class="fa-solid fa-file-pdf text-3xl text-orange-400"></i>
+            </div>
+            <span class="font-bold text-slate-700 text-lg pointer-events-none">Klik atau Drop file PDF di sini</span>
+        </div>
+
+        <!-- Editor Area -->
+        <div id="editorArea" class="hidden animate-fade-in">
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 mb-8">
+                <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-200">
+                    <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-orange-500 text-xl">
+                        <i class="fa-solid fa-file-pdf"></i>
+                    </div>
+                    <div>
+                        <h3 id="fileName" class="font-bold text-slate-800 text-lg truncate max-w-sm">document.pdf</h3>
+                        <p class="text-sm text-slate-500" id="fileInfo">Memuat...</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <label class="font-semibold text-slate-700 block">Pilih Halaman yang Ingin Diekstrak</label>
+                    <p class="text-sm text-slate-500 mb-4">Masukkan nomor halaman (misal: 1,3,5) atau rentang halaman (misal: 2-5).</p>
+                    <input type="text" id="pageRangeInput" class="w-full p-4 rounded-xl border border-slate-300 focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 outline-none text-slate-700 font-medium placeholder-slate-400" placeholder="Contoh: 1, 3, 5-10">
+                    <p class="text-xs text-red-500 hidden mt-1" id="errorText">Format halaman tidak valid atau di luar jangkauan.</p>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center border-t border-slate-100 pt-6">
+                <button id="btnReset" class="text-slate-500 hover:text-slate-700 font-medium px-4 py-2 flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-rotate-left"></i> Ganti File
+                </button>
+                <button id="btnProcess" class="px-8 py-3.5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl shadow-lg shadow-orange-500/30 transition-all hover:-translate-y-1 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <i class="fa-solid fa-scissors"></i> Ekstrak PDF
+                </button>
+            </div>
+        </div>
+
+        <!-- Result Area -->
+        <div id="resultArea" class="hidden text-center animate-fade-in pt-6">
+            <div class="mb-6 text-green-600 font-bold flex flex-col items-center justify-center gap-3">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-3xl">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <span class="text-xl">PDF Berhasil Dipisah!</span>
+            </div>
+            
+            <a id="btnDownload" class="inline-flex px-8 py-3.5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl shadow-lg shadow-orange-500/30 transition-all hover:-translate-y-1 active:translate-y-0 items-center justify-center gap-2 cursor-pointer">
+                <i class="fa-solid fa-download"></i> Download Hasil PDF
+            </a>
+            <div class="mt-6">
+                <button id="btnResetAfter" class="text-sm text-slate-500 hover:text-slate-700 font-medium underline">Proses file lainnya</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+        <!-- Bottom Ad Space -->
+        <div class="w-full max-w-4xl mx-auto mt-12 h-24 border-2 border-dashed border-slate-300 rounded-2xl flex items-center justify-center text-slate-400 bg-white/50 relative overflow-hidden group hover:border-slate-400 transition-colors">
+            <span class="font-medium text-sm flex flex-col items-center gap-1"><i class="fa-solid fa-rectangle-ad text-2xl"></i> Ad Space (728x90)</span>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass border-t border-white/50 mt-auto relative z-10">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-center text-slate-500 text-sm">
+            <p>&copy; 2026 MicroTools. All Client-Side, No Server Cost.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('fileInput');
+    const editorArea = document.getElementById('editorArea');
+    const fileName = document.getElementById('fileName');
+    const fileInfo = document.getElementById('fileInfo');
+    const pageRangeInput = document.getElementById('pageRangeInput');
+    const errorText = document.getElementById('errorText');
+    const btnProcess = document.getElementById('btnProcess');
+    const btnReset = document.getElementById('btnReset');
+    const resultArea = document.getElementById('resultArea');
+    const btnDownload = document.getElementById('btnDownload');
+    const btnResetAfter = document.getElementById('btnResetAfter');
+
+    let currentFile = null;
+    let pdfDoc = null;
+    let totalPages = 0;
+
+    const { PDFDocument } = PDFLib;
+
+    dropzone.addEventListener('click', () => fileInput.click());
+
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eName => {
+        dropzone.addEventListener(eName, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    ['dragenter', 'dragover'].forEach(eName => {
+        dropzone.addEventListener(eName, () => dropzone.classList.add('bg-orange-100', 'border-orange-500', 'scale-[1.02]'));
+    });
+
+    ['dragleave', 'drop'].forEach(eName => {
+        dropzone.addEventListener(eName, () => dropzone.classList.remove('bg-orange-100', 'border-orange-500', 'scale-[1.02]'));
+    });
+
+    dropzone.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        if(dt.files && dt.files.length) handleFile(dt.files[0]);
+    });
+
+    fileInput.addEventListener('change', function() {
+        if(this.files && this.files.length) handleFile(this.files[0]);
+    });
+
+    async function handleFile(file) {
+        if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
+            alert('Harap pilih file PDF.');
+            return;
+        }
+
+        currentFile = file;
+        fileName.innerText = file.name;
+        
+        dropzone.classList.add('hidden');
+        editorArea.classList.remove('hidden');
+
+        try {
+            const arrayBuffer = await file.arrayBuffer();
+            pdfDoc = await PDFDocument.load(arrayBuffer);
+            totalPages = pdfDoc.getPageCount();
+            fileInfo.innerText = `Total Halaman: ${totalPages} • Ukuran: ${(file.size / 1024 / 1024).toFixed(2)} MB`;
+        } catch (e) {
+            alert('File PDF tidak dapat dibaca. Mungkin dilindungi password atau rusak.');
+            resetUI();
+        }
+    }
+
+    function resetUI() {
+        currentFile = null;
+        pdfDoc = null;
+        totalPages = 0;
+        fileInput.value = '';
+        pageRangeInput.value = '';
+        errorText.classList.add('hidden');
+        
+        editorArea.classList.add('hidden');
+        resultArea.classList.add('hidden');
+        dropzone.classList.remove('hidden');
+    }
+
+    btnReset.addEventListener('click', resetUI);
+    btnResetAfter.addEventListener('click', resetUI);
+
+    // Parse page range: e.g. "1, 3, 5-7" -> [0, 2, 4, 5, 6] (0-indexed)
+    function parsePageRange(input, maxPages) {
+        let pages = new Set();
+        const parts = input.split(',').map(s => s.trim()).filter(s => s);
+        
+        for (let part of parts) {
+            if (part.includes('-')) {
+                const [start, end] = part.split('-').map(s => parseInt(s.trim()));
+                if (isNaN(start) || isNaN(end) || start > end || start < 1 || end > maxPages) return null;
+                for (let i = start; i <= end; i++) pages.add(i - 1);
+            } else {
+                const num = parseInt(part);
+                if (isNaN(num) || num < 1 || num > maxPages) return null;
+                pages.add(num - 1);
+            }
+        }
+        return Array.from(pages).sort((a, b) => a - b);
+    }
+
+    btnProcess.addEventListener('click', async () => {
+        const input = pageRangeInput.value;
+        if (!input) {
+            errorText.innerText = "Masukkan rentang halaman terlebih dahulu.";
+            errorText.classList.remove('hidden');
+            return;
+        }
+
+        const pagesToExtract = parsePageRange(input, totalPages);
+        if (!pagesToExtract || pagesToExtract.length === 0) {
+            errorText.innerText = `Format tidak valid. Pastikan antara 1 dan ${totalPages}.`;
+            errorText.classList.remove('hidden');
+            return;
+        }
+        errorText.classList.add('hidden');
+
+        btnProcess.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
+        btnProcess.disabled = true;
+
+        try {
+            const newPdfDoc = await PDFDocument.create();
+            const copiedPages = await newPdfDoc.copyPages(pdfDoc, pagesToExtract);
+            
+            copiedPages.forEach((page) => {
+                newPdfDoc.addPage(page);
+            });
+
+            const pdfBytes = await newPdfDoc.save();
+            const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+
+            btnDownload.href = url;
+            btnDownload.download = `Split_${currentFile.name}`;
+
+            editorArea.classList.add('hidden');
+            resultArea.classList.remove('hidden');
+
+        } catch (e) {
+            console.error(e);
+            alert('Terjadi kesalahan saat memproses PDF.');
+        } finally {
+            btnProcess.innerHTML = '<i class="fa-solid fa-scissors"></i> Ekstrak PDF';
+            btnProcess.disabled = false;
+        }
+    });
+});
+</script>
+</body>
+</html>
