@@ -223,11 +223,45 @@
         </div>
         
         <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-slate-100 shadow-lg absolute w-full left-0 top-16">
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-slate-100 shadow-lg absolute w-full left-0 top-16 overflow-y-auto max-h-[85vh] z-50 pb-6">
             <div class="px-4 py-4 flex flex-col gap-4">
-                <a href="/microtools-app" class="text-sm font-semibold text-slate-600 hover:text-brand-500">Beranda (Semua Tools)</a>
-                <a href="/microtools-app/qr-generator" class="text-sm font-semibold text-slate-600 hover:text-indigo-500">QR Generator</a>
-                <a href="/microtools-app/tentang" class="text-sm font-semibold text-slate-600 hover:text-slate-900">Tentang</a>
+                <a href="/microtools-app" class="text-sm font-semibold text-slate-800 hover:text-brand-500">Beranda</a>
+                
+                <!-- Mobile Tools Menu -->
+                <div class="flex flex-col gap-2">
+                    <div class="text-sm font-semibold text-brand-600">Tools PDF</div>
+                    <div class="grid grid-cols-2 gap-2 pl-2 mt-1 border-l-2 border-brand-100">
+                        <a href="/microtools-app/pdf-merge" class="text-[13px] text-slate-600 hover:text-brand-500 py-1">Gabungkan PDF</a>
+                        <a href="/microtools-app/pdf-compress" class="text-[13px] text-slate-600 hover:text-brand-500 py-1">Kompres PDF</a>
+                        <a href="/microtools-app/pdf-to-jpg" class="text-[13px] text-slate-600 hover:text-brand-500 py-1">PDF ke JPG</a>
+                        <a href="/microtools-app/pdf-optimize" class="text-[13px] text-slate-600 hover:text-brand-500 py-1">Optimize PDF</a>
+                        <a href="/microtools-app/pdf-split" class="text-[13px] text-slate-600 hover:text-brand-500 py-1">Pisahkan PDF</a>
+                        <a href="/microtools-app/pdf-crop" class="text-[13px] text-slate-600 hover:text-brand-500 py-1">Crop PDF</a>
+                        <a href="/microtools-app/pdf-rotate" class="text-[13px] text-slate-600 hover:text-brand-500 py-1">Putar PDF</a>
+                        <a href="/microtools-app/pdf-remove-pages" class="text-[13px] text-slate-600 hover:text-brand-500 py-1">Hapus Halaman</a>
+                        <a href="/microtools-app/pdf-extract-pages" class="text-[13px] text-slate-600 hover:text-brand-500 py-1">Ekstrak Halaman</a>
+                        <a href="/microtools-app/pdf-organize-pages" class="text-[13px] text-slate-600 hover:text-brand-500 py-1">Atur Halaman</a>
+                        <a href="/microtools-app/pdf-page-numbers" class="text-[13px] text-slate-600 hover:text-brand-500 py-1">Nomor Halaman</a>
+                        <a href="/microtools-app/img-to-pdf" class="text-[13px] text-slate-600 hover:text-brand-500 py-1">PNG ke PDF</a>
+                        <a href="/microtools-app/pdf-to-txt" class="text-[13px] text-slate-600 hover:text-brand-500 py-1">PDF ke TXT</a>
+                        <a href="/microtools-app/pdf-unlock" class="text-[13px] text-green-600 hover:text-green-700 py-1">Buka Kunci PDF</a>
+                        <a href="/microtools-app/pdf-watermark" class="text-[13px] text-blue-600 hover:text-blue-700 py-1">Watermark PDF</a>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-2 pt-1">
+                    <div class="text-sm font-semibold text-brand-600">Lainnya</div>
+                    <div class="grid grid-cols-2 gap-2 pl-2 mt-1 border-l-2 border-brand-100">
+                        <a href="/microtools-app/html-to-pdf" class="text-[13px] text-slate-600 hover:text-brand-500 py-1">HTML ke PDF</a>
+                        <a href="/microtools-app/pdf-fixer" class="text-[13px] text-slate-600 hover:text-brand-500 py-1">Perbaiki Teks PDF</a>
+                        <a href="/microtools-app/word-metadata-cleaner" class="text-[13px] text-slate-600 hover:text-brand-500 py-1">Pembersih Metadata</a>
+                    </div>
+                </div>
+
+                <div class="border-t border-slate-100 pt-3 flex flex-col gap-4">
+                    <a href="/microtools-app/qr-generator" class="text-sm font-semibold text-slate-800 hover:text-indigo-500">QR Generator</a>
+                    <a href="/microtools-app/tentang" class="text-sm font-semibold text-slate-800 hover:text-slate-900">Tentang</a>
+                </div>
             </div>
         </div>
     </nav>
